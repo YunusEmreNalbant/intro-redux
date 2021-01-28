@@ -1,26 +1,31 @@
 import React from 'react';
-import {connect} from "react-redux"
+import {connect,useDispatch,useSelector} from "react-redux"
 
 
-class CategoryList extends React.Component {
-    render() {
-        return (
-            <div>
-                <h3>Category</h3>
-                <h5>Seçili Kategori: {this.props.currentCategory.categoryName}</h5>
-            </div>
-        );
-    }
+const CategoryList = (props) => {
+
+    const currentCategory = useSelector(state=>state.changeCategoryReducer);
+
+    /*
+        useSelector sayesinde connect e gerek yok ve aşağıdaki koda da artık gerek yok.
+
+        function mapStateToProps(state) {
+            return {
+                currentCategory: state.changeCategoryReducer
+            }
+        }
+     */
+    return (
+        <div>
+            <h3>Category</h3>
+            <h5>Seçili Kategori:{currentCategory.categoryName}</h5>
+        </div>
+    );
+
 }
 
-function mapStateToProps(state) {
 
-    return {
-        currentCategory: state.changeCategoryReducer
-    }
-}
-
-export default connect(mapStateToProps)(CategoryList);
+export default CategoryList;
 
 
 
